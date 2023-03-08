@@ -1,0 +1,41 @@
+#include <ros/ros.h>
+#include <carla_msgs/CarlaEgoVehicleControl.h>
+// rostopic pub /carla/ego_vehicle/vehicle_control_cmd carla_msgs/CarlaEgoVehicleControl
+
+int main(int argc, char **argv)
+{
+  // ROS INITIALIZATION
+  ros::init(argc, argv, "mpcc_carla_ros_bridge");
+  ros::NodeHandle nh;
+
+  // PUB, SUB
+  // create a publisher for the vehicle control commands
+  ros::Publisher control_pub = nh.advertise<carla_msgs::CarlaEgoVehicleControl>("/carla/ego_vehicle/vehicle_control_cmd", 1);
+
+  // MSG
+  carla_msgs::CarlaEgoVehicleControl control_msg;
+  
+  // MAP SETTING
+  // load the desired World by name
+  std::string world_name = "Town07_Opt"
+  carla_ros_bridge.loadWorld(world_name); 
+  // wait for the world to be loaded
+  while(!carla_ros_bridge.worldLoaded()){
+    ros::spicOnce();
+    ros::Duration(0.1).sleep();
+  }
+
+  ros::Rate loop_rate(10);
+  double time = 0.0;
+  while (ros::ok())
+  {
+    // control_msg.throttle = 0.5 * (1.0+sin(time));
+    // control_msg.steer = 0.1 * sin(time) ;
+    // control_msg.brake = 0.0;
+    // control_pub.publish(control_msg);
+    // time += 0.1;
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
+  return 0;
+}

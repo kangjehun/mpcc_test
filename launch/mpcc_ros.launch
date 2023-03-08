@@ -1,0 +1,6 @@
+<launch>
+  <!-- <arg name="manual_override" default = "true" /> -->
+  <node pkg="mpcc_ros" type="mpcc_ros" name="mpcc_ros" output="screen">
+    <!-- <param name="manual_override" value="$(arg manual_override)" /> -->
+  </node>
+</launch>

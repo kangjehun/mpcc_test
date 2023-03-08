@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="mpcc_ros" type="mpcc_exp1" name="mpcc_exp1" output="screen">
+  </node>
+</launch>
